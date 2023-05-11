@@ -1,0 +1,145 @@
+body {
+  margin: 0;
+}
+#wrap {
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  padding: 10px 0.6944vw;
+  display: flex;
+  flex-direction: column;
+}
+
+/* background-color: #383a3d; */
+.header {
+  width: 100%;
+  height: 170px;
+  background-color: #383a3d;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.main-contents {
+  width: 100%;
+  height: 635px;
+  display: flex;
+  flex-direction: row;
+}
+.main-left {
+  width: 25vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-left div:not(:last-child) {
+  width: 100%;
+  height: 152.5px;
+  background-color: #383a3d;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+.main-left div:last-child {
+  width: 100%;
+  height: 303.5px;
+  background-color: #383a3d;
+  border-radius: 5px;
+}
+.main-right {
+  width: 75vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 14px;
+}
+.main-right-top {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  height: 482.5px;
+  /* height 설정을 잘못줘서 꼬였던거임. */
+}
+.main-right-top-column1 {
+  width: 32.7%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0;
+  float: left;
+}
+.main-right-top-column1 div:not(:last-child) {
+  width: 100%;
+  height: 152.5px;
+  background-color: #383a3d;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+.main-right-top-column1 div:last-child {
+  width: 100%;
+  height: 152.5px;
+  background-color: #383a3d;
+  border-radius: 5px;
+}
+.main-right-top-column2 {
+  width: 32.7%;
+  height: 100%;
+  justify-content: space-between;
+  float: left;
+  margin-left: 14px;
+}
+.main-right-top-column2 div:not(:last-child) {
+  width: 100%;
+  height: 316.66px;
+  background-color: #383a3d;
+  border-radius: 5px;
+  margin-bottom: 12px;
+}
+.main-right-top-column2 div:last-child {
+  width: 100%;
+  height: 150.83px;
+  background-color: #383a3d;
+  border-radius: 5px;
+}
+.main-right-top-column3 {
+  width: 32.7%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  float: left;
+  margin-left: 15px;
+}
+
+.main-right-top-column3 div:not(:last-child) {
+  width: 100%;
+  height: 150.83px;
+  background-color: #383a3d;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+.main-right-top-column3 div:last-child {
+  width: 100%;
+  height: 316.66px;
+  background-color: #383a3d;
+  border-radius: 5px;
+}
+.main-right-top::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.main-right-bottom {
+  display: block;
+  width: 100%;
+  height: 150px;
+  background-color: #383a3d;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.footer {
+  margin-top: 15px;
+  width: 100%;
+  height: 170px;
+  background-color: #383a3d;
+  border-radius: 5px;
+}

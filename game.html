@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game</title>
+    <link rel="stylesheet" href="/game.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div class="play-area flex-column align-ceter">
+        <div
+          class="play-area-top border-rad5 flex-column text-center align-ceter"
+        >
+          <div id="text" class="flex-column border-rad5">
+            <span class="big-text">가위 바위 보!</span>
+          </div>
+          <!-- 사용자가 부여하는 속성 : dataset  여기선 data-type 으로 부여함-->
+          <div class="button-container flex-row align-ceter">
+            <div id="sissors" class="show margin-right5">
+              <img
+                src="/images/sissors.png"
+                alt=""
+                class="selected"
+                data-type="1"
+              />
+            </div>
+            <div id="rock" class="show selected margin-right5">
+              <img
+                src="/images/rock.png"
+                alt=""
+                class="selected"
+                data-type="2"
+              />
+            </div>
+            <div id="paper" class="show selected">
+              <img
+                src="/images/paper.png"
+                alt=""
+                class="selected"
+                data-type="3"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="play-area-bottom flex-row border-rad5">
+          <div>
+            <p class="text-center">당신</p>
+            <div class="show"><img src="" id="my-choice" /></div>
+          </div>
+          <div>
+            <p class="text-center">결과</p>
+            <div id="show-result" class="show flex-row align-ceter">
+              <div id="text-container" class="border-rad15 big-text"></div>
+            </div>
+          </div>
+          <div>
+            <p class="text-center">컴퓨터</p>
+            <div class="show">
+              <img src="" alt="" id="com-choice" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/game.js"></script>
+  </body>
+</html>
