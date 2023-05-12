@@ -1,0 +1,246 @@
+body,
+html {
+  margin: 0;
+}
+/* fallback */
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v140/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2)
+    format("woff2");
+}
+
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+#container {
+  width: 100vw;
+  height: 100%;
+  min-width: 1350px;
+}
+#main {
+  width: 75%;
+  height: 100%;
+}
+#main-header {
+  width: 100%;
+  height: 75px;
+  justify-content: space-between;
+  align-items: center;
+}
+#main-header-logo {
+  text-align: left;
+  width: 10%;
+  height: 75px;
+  line-height: 75px;
+  font-size: 25px;
+  font-weight: 600;
+}
+#main-header-nav {
+  font-size: 18px;
+  font-weight: 500;
+}
+#main-contents-top {
+  width: 100%;
+  font-size: 125px;
+}
+#main-contents-top > div {
+  height: 250px;
+  line-height: 250px;
+}
+#main-contents-nav {
+  width: 100%;
+  height: 50px;
+  font-size: 18px;
+  font-weight: 500;
+}
+#nav-wrapper {
+  width: 70%;
+  height: 100%;
+  background-color: #f0f2f2;
+  justify-content: space-between;
+  align-items: center;
+}
+#nav-wrapper > div {
+  width: calc(100% / 6);
+  height: 100%;
+}
+#nav-wrapper > div:hover {
+  background-color: #444545;
+  color: #fff;
+}
+#main-contents-div {
+  width: 100%;
+  height: 1200px;
+}
+#main-contents-div-left {
+  width: 65%;
+  height: 100%;
+}
+#left-img {
+  width: 100%;
+  height: 350px;
+  background-color: #f0f2f2;
+}
+#main-contents-div-right {
+  width: 32%;
+  height: 100%;
+}
+#main-contents-sidebar {
+  width: 100%;
+  height: 550px;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f0f2f2;
+}
+#ask-of-me {
+  width: 100%;
+  height: 200px;
+  background-color: #9b9e9e;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#ask-of-me > div:first-child {
+  width: 55%;
+  color: #737575;
+}
+#ask-of-me button {
+  width: 150px;
+  height: 50px;
+  border: none;
+}
+#footer {
+  width: 100%;
+  height: 400px;
+  padding: 20px 100px;
+  color: #a9abab;
+  box-sizing: border-box;
+  background-color: #444545;
+  justify-content: space-around;
+  align-items: center;
+}
+#footer > div {
+  width: calc(100% / 3);
+  height: 250px;
+}
+#footer > div:nth-child(1) {
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 30px;
+  box-sizing: border-box;
+}
+#footer > div:nth-child(1) > div {
+  width: 100%;
+  height: 30px;
+  justify-content: flex-start;
+  align-items: center;
+}
+#footer > div:nth-child(2) {
+  justify-content: space-evenly;
+}
+#footer > div:nth-child(3) {
+  justify-content: space-between;
+  align-items: flex-end;
+}
+#footer > div:nth-child(3) > button {
+  width: 150px;
+  height: 30px;
+  border: 1px solid #a9abab;
+  color: #a9abab;
+  background-color: transparent;
+}
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+.flexRow {
+  display: flex;
+  flex-direction: row;
+}
+.alignCenter {
+  justify-content: center;
+  align-items: center;
+}
+.flaotLeft {
+  float: left;
+}
+
+.clearLeft::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+.maginLeft15 {
+  margin-left: 15px;
+}
+.marginleft25 {
+  margin-left: 25px;
+}
+.marginbottom5 {
+  margin-bottom: 5px;
+}
+.marginbottom15 {
+  margin-bottom: 15px;
+}
+.marginbottom25 {
+  margin-bottom: 25px;
+}
+.marginbottom35 {
+  margin-bottom: 35px;
+}
+.marginbottom50 {
+  margin-bottom: 50px;
+}
+.marginright15 {
+  margin-right: 15px;
+}
+.marginright30 {
+  margin-right: 30px;
+}
+.textCenter {
+  text-align: center;
+}
+.borderRad25 {
+  border-radius: 25px;
+}
+.borderRad50 {
+  border-radius: 50px;
+}
+.bigSize {
+  font-size: 50px;
+}
+.tilteText {
+  font-size: 30px;
+  font-weight: 600;
+}
+.accent {
+  font-size: 20px;
+  font-weight: 600;
+}
+.buttonText {
+  font-size: 20px;
+  font-weight: 400;
+}
+.buttonText-s {
+  font-size: 13px;
+  font-weight: 400;
+}
+.letterSpacing {
+  letter-spacing: 0.2em;
+}
+.borderRight {
+  border-right: 1px solid #a9abab;
+}
