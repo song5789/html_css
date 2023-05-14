@@ -28,24 +28,23 @@ let comRps = {
 
 //dataset.[datasetName] <- 사용자가 부여한 속성의 값을 불러옴
 window.onload = function () {
-  let myIndex;
+  let index;
   let btnArea = document.querySelector(".button-container");
   btnArea.onclick = function (e) {
-    myIndex = e.target.dataset.type - 1;
+    index = e.target.dataset.type - 1;
+    socket.emit("send", arrRps[index].type);
 
-    let resultChkBtn = document.querySelector("#check-result");
-    resultChkBtn.addEventListener("click", () => {
-      console.log(myIndex);
-      socket.emit("send", arrRps[myIndex].type);
-
-      socket.on("echo", (data) => {
-        console.log(data);
-        let saveBattleResult = battleResult(arrRps[myIndex].type, data);
-        setImgSrc(myImg, arrRps[myIndex].url);
-        setImgSrc(comImg, arrRps[data - 1].url);
-        result.innerText = saveBattleResult;
-        result.style.backgroundColor = changeBgColor(saveBattleResult);
-      });
+    socket.on("myResult", (data) => {
+      setImgSrc(myImg, arrRps[index].url);
+      setImgSrc(comImg, arrRps[data.type - 1].url);
+      result.innerText = data.compare;
+      result.style.backgroundColor = changeBgColor(data.compare);
+    });
+    socket.on("rivalResult", (data) => {
+      setImgSrc(myImg, arrRps[index].url);
+      setImgSrc(comImg, arrRps[data.type - 1].url);
+      result.innerText = data.compare;
+      result.style.backgroundColor = changeBgColor(data.compare);
     });
   };
   reset.addEventListener("click", () => {
@@ -53,6 +52,11 @@ window.onload = function () {
   });
   socket.on("reload", () => {
     location.reload();
+  });
+
+  socket.on("holdInput", () => {
+    result.innerText = "입력 대기중..";
+    result.style.backgroundColor = "black";
   });
 };
 
