@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        height: 50px;
+        width: 100px;
+        background-color: red;
+      }
+      p {
+        height: 50px;
+        width: 100px;
+        background-color: green;
+      }
+      span {
+        height: 100px;
+        width: 100px;
+        background-color: red;
+      }
+      a {
+        height: 100px;
+        width: 100px;
+        background-color: blue;
+        display: inline-block;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 태그: 블록, 인라인 -->
+    <!-- 블록: 높이는 없고 부모의 100% 너비[요소 옆에 다른 요소가 올 수 없음] -->
+    <!-- 넓이를 강제로 지정해줘도 나머지는 margin 으로 바뀜 -->
+    <div></div>
+    <p></p>
+
+    <!-- 인라인: 너비, 높이가 없음. (글자처럼 취급)-->
+    <!-- 인라인 태그 안에는 블록태그를 넣으면 안됨.-->
+    <a
+      >링크
+      <p></p></a
+    ><span
+      >스팬
+      <div></div
+    ></span>
+
+    <!-- 인라인-블록: 인라인특징을 가지는 블록 요소 -->
+  </body>
+</html>
