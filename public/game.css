@@ -45,6 +45,7 @@ html {
 .button-container {
   width: 100%;
   height: 320px;
+  position: relative;
 }
 #com-choice {
   transform: rotate(180deg);
@@ -139,6 +140,16 @@ html {
 
 #reset:hover {
   opacity: 0.8;
+}
+
+.deactive-btn {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: gray;
+  opacity: 0.8;
+  z-index: 10;
+  display: none;
 }
 
 @keyframes showElem {

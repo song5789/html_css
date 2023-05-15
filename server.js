@@ -41,12 +41,17 @@ io.on("connection", (socket) => {
       io.to(arr[3]).emit("rivalResult", rivalResultObj);
       arr = [];
     } else {
-      io.sockets.emit("holdInput");
+      // io.sockets.emit("holdInput");
+      socket.emit("holdInput");
     }
   });
 
   socket.on("disconnect", () => {
-    console.log("SOCKETIO disconnection EVENT:", socket.id, "client disconnected");
+    console.log(
+      "SOCKETIO disconnection EVENT:",
+      socket.id,
+      "client disconnected"
+    );
   });
 
   socket.on("reset", () => {

@@ -30,6 +30,7 @@ let comRps = {
 window.onload = function () {
   let index;
   let btnArea = document.querySelector(".button-container");
+  let deActive = document.querySelector(".deactive-btn");
   btnArea.onclick = function (e) {
     index = e.target.dataset.type - 1;
     socket.emit("send", arrRps[index].type);
@@ -39,12 +40,14 @@ window.onload = function () {
       setImgSrc(comImg, arrRps[data.type - 1].url);
       result.innerText = data.compare;
       result.style.backgroundColor = changeBgColor(data.compare);
+      deActive.style.display = "none";
     });
     socket.on("rivalResult", (data) => {
       setImgSrc(myImg, arrRps[index].url);
       setImgSrc(comImg, arrRps[data.type - 1].url);
       result.innerText = data.compare;
       result.style.backgroundColor = changeBgColor(data.compare);
+      deActive.style.display = "none";
     });
   };
   reset.addEventListener("click", () => {
@@ -57,6 +60,7 @@ window.onload = function () {
   socket.on("holdInput", () => {
     result.innerText = "입력 대기중..";
     result.style.backgroundColor = "black";
+    deActive.style.display = "block";
   });
 };
 
