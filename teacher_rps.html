@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>가위바위보</title>
+    <style>
+      #rps {
+        display: none;
+        width: 500px;
+        border: 1px solid;
+      }
+      #rps > div {
+        overflow: hidden;
+      }
+      /* #rps > div:nth-child(2) {
+      height: 25px;
+    } */
+      #rps > div > div {
+        float: left;
+        width: calc(100% / 3);
+      }
+      #rps > div:first-child > div {
+        height: 100px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 65%;
+      }
+      #rps > div:first-child > div:nth-child(2) {
+        text-align: center;
+        line-height: 100px;
+        font-size: 75px;
+      }
+      #rps > div:nth-child(2) > div {
+        text-align: center;
+        height: 25px;
+        line-height: 25px;
+      }
+      #man {
+        transform: rotate(90deg) scaleX(-1);
+      }
+      #result {
+      }
+      #com {
+        transform: rotate(-90deg);
+      }
+      #btnArea {
+        border-top: 1px solid;
+      }
+      #btnArea > div {
+        height: 100px;
+        width: calc((100% - 2px) / 3) !important;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 50%;
+        cursor: pointer;
+      }
+      #btnArea > div:first-child,
+      #btnArea > div:nth-child(2) {
+        border-right: 1px solid;
+      }
+      #btnArea > div:first-child {
+        background-image: url(https://feelstory.com/gnu/nori/img/1_on.png);
+      }
+      #btnArea > div:nth-child(2) {
+        background-image: url(https://feelstory.com/gnu/nori/img/2_on.png);
+      }
+      #btnArea > div:last-child {
+        background-image: url(https://feelstory.com/gnu/nori/img/3_on.png);
+      }
+      #btnArea.disable {
+        background: rgba(0, 0, 0, 0.5);
+      }
+      #btnArea.disable > div {
+        cursor: default;
+      }
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+      window.onload = function () {
+        let socket = io.connect();
+        let display = document.querySelector("#display");
+        let rps = document.querySelector("#rps");
+        let status = document.querySelector("#status");
+        let btn = document.querySelector("button");
+        let elMy = document.querySelector("#my");
+        let elYou = document.querySelector("#you");
+        let btnArea = document.querySelector("#btnArea");
+        let elMan = document.querySelector("#man");
+        let elCom = document.querySelector("#com");
+        let result = document.querySelector("#result");
+
+        socket.on("intro", function () {
+          display.style.display = "block";
+          status.innerText = "사용 아이디 입력";
+          rps.style.display = "none";
+        });
+
+        socket.on("game", function (data) {
+          display.style.display = "none";
+          if (data.length == 1) {
+            status.innerText = "상대 기다림...";
+            btnArea.classList.add("disable");
+          } else {
+            status.innerText = "게임 시작";
+            btnArea.classList.remove("disable");
+            setBlankImg();
+            elYou.innerText = data.user.opponent;
+          }
+          rps.style.display = "block";
+        });
+
+        socket.on("full", function () {
+          display.style.display = "none";
+          status.innerText = "자리 없음!";
+          rps.style.display = "none";
+        });
+
+        socket.on("isWin", function (data) {
+          status.innerText = "결과";
+          setBgImg(arrRps[data.optType - 1], elCom);
+          switch (data.isWin) {
+            case 0:
+              result.innerText = "무";
+              result.style.color = "black";
+              break;
+            case 1:
+              result.innerText = "승";
+              result.style.color = "blue";
+              break;
+            case -1:
+              result.innerText = "패";
+              result.style.color = "red";
+              break;
+          }
+        });
+
+        btn.onclick = function () {
+          let userId = document.querySelector("#userId");
+          if (userId.value != "") {
+            elMy.innerText = userId.value;
+            socket.emit("regUserId", userId.value);
+          } else {
+            status.innerText = "아이디 입력";
+            userId.focus();
+            userId.style.background = "lightgreen";
+          }
+        };
+
+        let arrRps = [];
+        // 1 - 가위, 2 - 바위, 3 - 보
+        function Rps(type, url, name) {
+          this.type = type;
+          this.url = url;
+          this.name = name;
+        }
+        arrRps = [
+          new Rps(1, "https://feelstory.com/gnu/nori/img/1_on.png", "가위"),
+          new Rps(2, "https://feelstory.com/gnu/nori/img/2_on.png", "바위"),
+          new Rps(3, "https://feelstory.com/gnu/nori/img/3_on.png", "보"),
+        ];
+
+        btnArea.onclick = function (e) {
+          if (!btnArea.classList.contains("disable")) {
+            let type = Number(e.target.dataset.type);
+            let index = type - 1;
+            let man = arrRps[index];
+
+            setBgImg(man, elMan);
+            socket.emit("whoWin", type);
+            btnArea.classList.add("disable");
+            status.innerText = "상대가 선택하기를 기다림...";
+          }
+        };
+
+        function setBgImg(obj, el) {
+          el.style.backgroundImage = `url(${obj.url})`;
+        }
+
+        function setBlankImg() {
+          elMan.style.backgroundImage = "none";
+          elCom.style.backgroundImage = "none";
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div id="status"></div>
+    <div id="display">
+      <input type="text" id="userId" />
+      <button>입장</button>
+    </div>
+    <div id="rps">
+      <div>
+        <div id="man"></div>
+        <div id="result"></div>
+        <div id="com"></div>
+      </div>
+      <div>
+        <div id="my"></div>
+        <div></div>
+        <div id="you"></div>
+      </div>
+      <div id="btnArea" class="disable">
+        <div data-type="1" data-name="가위"></div>
+        <div data-type="2" data-name="바위"></div>
+        <div data-type="3" data-set="보"></div>
+      </div>
+    </div>
+  </body>
+</html>
