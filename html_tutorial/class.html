@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="refresh" content="5;url=bookmark.html" />
+    <title>Document</title>
+    <style>
+      /* 아래 자바스크립트로 정의한 것과 동일하게 동작 */
+      /* .city {
+        transition: 0.4s;
+      }
+      .city:nth-child(1) {
+        transition-delay: 0;
+      }
+      .city:nth-child(2) {
+        transition-delay: 0.2s;
+      }
+      .city:nth-child(3) {
+        transition-delay: 0.3s;
+      }
+      .city:nth-child(4) {
+        transition-delay: 0.4s;
+      }
+      .city:nth-child(5) {
+        transition-delay: 0.5s;
+      }
+      .city:nth-child(6) {
+        transition-delay: 0.6s;
+      } */
+
+      .super {
+        height: 100px;
+      }
+      .menu {
+        position: absolute;
+        height: 100vh;
+        width: 100px;
+        top: 0;
+        left: -100%;
+        background-color: red;
+        transition: 0.4s;
+      }
+      .menu.active {
+        left: 0px;
+      }
+      iframe {
+        width: 100%;
+        height: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe src="https://www.bing.com" frameborder="0"></iframe>
+    <div class="city">서울</div>
+    <div class="city">대전</div>
+    <div class="city">부산</div>
+    <div class="city">대구</div>
+    <div class="city">광주</div>
+    <div class="city">인천</div>
+    <button onclick="myFunction();">숨기기</button>
+    <button onclick="toggleMenu();" style="z-index: 99; position: relative">메뉴</button>
+    <div class="menu">메뉴</div>
+    <script>
+      function myFunction() {
+        // x 는 유사배열임. 배열 메소드 사용불가
+        let x = document.getElementsByClassName("city");
+        console.dir(x);
+        // Array.from 으로 배열로 만들어줌.
+        let arr = Array.from(x);
+        console.dir(arr);
+        arr.forEach((item, index) => {
+          item.style.transition = "0.4s";
+          item.style.transitionDelay = `${index * 0.2}s`;
+          item.style.backgroundColor = "red";
+        });
+        // classList: DOM 의 클래스를 관리하는 객체
+        // toggle: 클릭시 인자로 넣은 클래스를 넣고빼고함
+        console.log(arr[0].classList.toggle("super"));
+        console.log(arr[0].classList);
+      }
+      function toggleMenu() {
+        // 유사 배열이라도 인덱스가 있어 아래와 같이 접근 가능.
+        let menu = document.getElementsByClassName("menu")[0];
+        menu.classList.toggle("active");
+      }
+    </script>
+  </body>
+</html>

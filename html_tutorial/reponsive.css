@@ -1,0 +1,52 @@
+body,
+html {
+  margin: 0;
+  height: 100vh;
+}
+* {
+  box-sizing: border-box;
+  font-family: Verdana;
+  color: #aaaaaa;
+}
+#container {
+  width: 1440px;
+  height: 900px;
+  padding: 2.77vh 3.47vw;
+}
+#header {
+  width: 96.52vw;
+  height: 250px;
+  line-height: 250px;
+  font-size: 70px;
+  font-weight: 700;
+}
+.flexRow {
+  display: flex;
+  flex-direction: row;
+}
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+.alignCenter {
+  justify-content: center;
+  align-items: center;
+}
+.textAlign {
+  text-align: center;
+}
+.floatLeft {
+  float: left;
+}
+.clearFloat::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+ul {
+  list-style-type: none;
+}
+
+.backGray {
+  background-color: #e5e5e5;
+}
