@@ -3,22 +3,80 @@ html {
   margin: 0;
   height: 100vh;
 }
+/* 
+css 변수 
+정적
+동적 - 가변 : 넓이를모두 %, vw/vh ... (해당 넓이 / 전체 넓이) * 100
+     - 반응 : 미디어 쿼리
+*/
+:root {
+  --mar-bottom-5px: 5px;
+  --mar-bottom-15px: 15px;
+  --background-light-gray: #e5e5e5;
+  --mar-bottom-40px: 40px;
+}
 * {
   box-sizing: border-box;
   font-family: Verdana;
   color: #aaaaaa;
 }
 #container {
-  width: 1440px;
-  height: 900px;
-  padding: 2.77vh 3.47vw;
+  width: 100vw;
+  padding: 15px 1.04vw;
 }
 #header {
-  width: 96.52vw;
+  width: 100%;
   height: 250px;
-  line-height: 250px;
-  font-size: 70px;
+  font-size: 55px;
   font-weight: 700;
+}
+#main {
+  width: 100%;
+  height: 500px;
+  margin-bottom: var(--mar-bottom-15px);
+}
+#sidebar {
+  width: 20.83%;
+  height: 100%;
+}
+#text-container {
+  width: 57.44%;
+  height: 100%;
+  padding: 18px 1.2vw;
+}
+#text-container > div:first-child {
+  width: 100%;
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: var(--mar-bottom-40px);
+}
+#rightside {
+  width: 20.83%;
+  height: 100%;
+  padding: 15px;
+}
+#rightside > div:first-child {
+  width: 100%;
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: var(--mar-bottom-40px);
+}
+#footer {
+  width: 100%;
+  height: 120px;
+  font-size: 2em;
+}
+li {
+  width: 100%;
+  height: 70px;
+  text-align: center;
+  line-height: 60px;
+  font-size: 1.3em;
+}
+
+a:visited,
+a:link {
+  color: black;
 }
 .flexRow {
   display: flex;
@@ -43,10 +101,47 @@ html {
   content: "";
   clear: both;
 }
+.marginBottom15 {
+  margin-bottom: 15px;
+}
+.marginBottom10 {
+  margin-bottom: 10px;
+}
+.marginleft10 {
+  margin-left: 10px;
+}
 ul {
   list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 .backGray {
-  background-color: #e5e5e5;
+  background-color: var(--background-light-gray);
+}
+
+@media screen and (max-width: 620px) {
+  #container {
+    padding: 15px;
+  }
+  #header {
+    font-size: 2.7em;
+  }
+  #main {
+    flex-direction: column;
+    height: 900px;
+  }
+  #text-container > div:first-child {
+    font-size: 2em;
+  }
+  #sidebar,
+  #text-container,
+  #rightside {
+    width: 100%;
+    margin-left: 0;
+  }
+  #footer {
+    height: 70px;
+    font-size: 1.2em;
+  }
 }

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        height: 10000px;
+      }
+      div {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+      }
+      .static {
+        background-color: red;
+      }
+      .relative {
+        /* background-color: blue; */
+        position: relative;
+        top: 100px;
+        left: 200px;
+      }
+      .absolute {
+        position: absolute;
+        background-color: aqua;
+        top: 0;
+        left: 0;
+      }
+      .parent {
+        position: relative;
+        width: 500px;
+        height: 300px;
+        border: 1px solid blue;
+      }
+      .fixed {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+      }
+      .sticky {
+        position: sticky;
+        top: 100px;
+        left: 250px;
+        background-color: yellow;
+        /* sticky의 top 을 바꾸고 싶다면 translate 이용 */
+        transform: translateY(250px);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+    position: static, absolute, relative, fixed, sticky
+    static: 기본, 고정, 움직이지 않음.
+    relative: 자신이 만들어진 위치 기준으로 움직임.
+    absolute: 부모 기준으로 움직임(자리 차지하지 않음). 
+              부모가 없으면 계속 상위요소를 검색함. 그래도 없다면 window의 자식이됨.
+    fixed: window 기준으로 움직임.
+    sticky: top 값의 기준으로 fixed 됨. (left는 이동, 자리를 차지함.)
+    -->
+    <div class="static">static</div>
+    <div class="relative">relative</div>
+    <div class="static">static</div>
+    <div class="parent">
+      <div class="absolute">absolute</div>
+    </div>
+    <div class="static">static</div>
+    <div class="fixed">fixed</div>
+    <div class="static">static</div>
+    <div class="sticky">sticky</div>
+    <div class="static">static</div>
+  </body>
+</html>
