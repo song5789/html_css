@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -18,7 +18,7 @@
       }
       th,
       td {
-        height: 55px;
+        height: 100px;
       }
       tr > th:first-child,
       tr > td:first-child {
@@ -64,28 +64,33 @@
   </head>
   <body></body>
   <script>
-    let month = new Date().getMonth();
-    displayCalender(month);
+    let currentTime = new Date();
     window.onload = () => {
+      displayCalender(currentTime.getMonth());
+      let month = currentTime.getMonth();
       let btnContainer = document.querySelector(".btn");
       btnContainer.addEventListener("click", (e) => {
         let controlMonValue = e.target.dataset.type;
-        console.log(controlMonValue);
-        switch (controlMonValue) {
-          case "pre":
-            month--;
-            break;
-          case "next":
-            month++;
-            break;
+        if (month >= 0 && month <= 11) {
+          switch (controlMonValue) {
+            case "pre":
+              month--;
+              displayCalender(month);
+              break;
+            case "next":
+              month++;
+              displayCalender(month);
+              break;
+          }
+          if (month < 0) month = 11;
+          else if (month > 11) month = 0;
+          console.log(month);
         }
-        if (month < 0) month = 11;
-        else if (month > 11) month = 0;
       });
     };
     function displayCalender(month) {
-      let setDate = new Date();
-      setDate.setFullYear(setDate.getFullYear(), month, setDate.getDate());
+      let startDay = new Date(currentTime.getFullYear(), currentTime.getMonth(), 1);
+      let endDay = new Date(currentTime.getFullYear(), currentTime.getMonth() + 1, 0);
       let tableElem = document.getElementsByTagName("table")[0];
       let body = document.body;
       body.innerHTML = "";
@@ -103,8 +108,14 @@
         <th>금</th>
         <th>토</th>
     </tr>
-
         `;
+      for (let i = 0; i < 5; i++) {
+        table += `<tr>`;
+        for (let j = 0; j < 7; j++) {
+          table += `<td>ㅅㅂ</td>`;
+        }
+        table += `</tr>`;
+      }
       table += `</table>
       <div class="btn">
       <button data-type="pre">이전달로</button>
@@ -114,7 +125,7 @@
       body.insertAdjacentHTML("beforeend", table);
 
       let span = document.getElementsByTagName("span")[0];
-      span.innerText = `${setDate.getFullYear()} 년 ${setDate.getMonth() + 1} 월`;
+      span.innerText = `${startDay.getFullYear()} 년 ${startDay.getMonth() + 1} 월`;
       return true;
     }
   </script>
