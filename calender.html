@@ -9,16 +9,15 @@
       table {
         width: 100%;
         height: 100%;
-      }
-      table,
-      th,
-      td {
-        border: 1px solid black;
         border-collapse: collapse;
       }
+      th {
+        border-bottom: 1px solid #878686;
+      }
       th,
       td {
-        height: 100px;
+        height: 75px;
+        font-size: 23px;
       }
       tr > th:first-child,
       tr > td:first-child {
@@ -29,7 +28,7 @@
         color: blue;
       }
       td {
-        text-align: right;
+        text-align: center;
       }
       .btn {
         margin-top: 20px;
@@ -41,7 +40,7 @@
         align-items: center;
       }
       button {
-        width: 10%;
+        width: 15%;
         height: 50px;
         border: none;
         cursor: pointer;
@@ -60,73 +59,125 @@
         background-color: black;
         color: #fff;
       }
+      .disable {
+        color: #878686;
+      }
+      .today {
+        background-color: lightslategray;
+        border-radius: 50px;
+        height: 100%;
+        width: 100%;
+        line-height: 75px;
+        display: block;
+        color: #fff;
+      }
     </style>
   </head>
   <body></body>
   <script>
-    let currentTime = new Date();
+    let date = new Date();
+    let monthValue = 0;
     window.onload = () => {
-      displayCalender(currentTime.getMonth());
-      let month = currentTime.getMonth();
-      let btnContainer = document.querySelector(".btn");
-      btnContainer.addEventListener("click", (e) => {
-        let controlMonValue = e.target.dataset.type;
-        if (month >= 0 && month <= 11) {
-          switch (controlMonValue) {
-            case "pre":
-              month--;
-              displayCalender(month);
-              break;
-            case "next":
-              month++;
-              displayCalender(month);
-              break;
-          }
-          if (month < 0) month = 11;
-          else if (month > 11) month = 0;
-          console.log(month);
-        }
-      });
+      displayCalendar(monthValue);
     };
-    function displayCalender(month) {
-      let startDay = new Date(currentTime.getFullYear(), currentTime.getMonth(), 1);
-      let endDay = new Date(currentTime.getFullYear(), currentTime.getMonth() + 1, 0);
-      let tableElem = document.getElementsByTagName("table")[0];
+
+    function displayCalendar(month) {
       let body = document.body;
       body.innerHTML = "";
+      // 필요 변수들
+      // 기준 년
+      let calendarYear = date.getFullYear();
+      // 기준 달
+      let calendarMonth = date.getMonth() + 1;
+      // 기준 일
+      let calendarToday = date.getDate();
+      // calendarMonth 에서 +1 했기 때문에 현재 월의 마지막날을 반환함.
+      let calcLastDay = new Date(calendarYear, calendarMonth + month, 0);
+      // 마지막날 일
+      let presMonthLastDate = calcLastDay.getDate();
+      let presMonthLastDay = calcLastDay.getDay();
+      let presMonth = new Date(calendarYear, date.getMonth() + month, 1);
+      // 첫번째날의 요일
+      let presMonthStartDay = presMonth.getDay();
+      // 달의 시작과 끝을 얻음.
+      let prevMonth = new Date(calendarYear, date.getMonth() + month, 0);
+      let prevDay = prevMonth.getDay();
+      let nextMonth = new Date(calendarYear, date.getMonth() + (month + 1), 1);
+
+      // 주수 계산 - 월의 시작 요일과 마지막일자를 더하고 7로 나눔
+      let countWeek = Math.ceil((presMonthStartDay + presMonthLastDate) / 7);
+      let calendarDay = 0;
+      let nextMonthDay = 0;
+      let prevMonthDay = prevMonth.getDate() - prevDay;
+      let prevPos = 0;
+      let presPos = 0;
+
+      // HTML 삽입
       let table = `
-      <div>
-        <span>0000년 0월</span>
-      </div>
+      <div>${presMonth.getFullYear()} 년 ${presMonth.getMonth() + 1} 월</div>
       <table>
-    <tr class="days">
-        <th>일</th>
-        <th>월</th>
-        <th>화</th>
-        <th>수</th>
-        <th>목</th>
-        <th>금</th>
-        <th>토</th>
-    </tr>
-        `;
-      for (let i = 0; i < 5; i++) {
+        <tr>
+          <th>일</th>
+          <th>월</th>
+          <th>화</th>
+          <th>수</th>
+          <th>목</th>
+          <th>금</th>
+          <th>토</th>
+        </tr>
+          `;
+      for (let i = 0; i < countWeek; i++) {
         table += `<tr>`;
-        for (let j = 0; j < 7; j++) {
-          table += `<td>ㅅㅂ</td>`;
+        for (let k = 0; k < 7; k++) {
+          table += `<td`;
+          if (prevDay < presMonthStartDay && presMonthStartDay > prevPos) {
+            table += `><span class="disable">${prevMonthDay}</span>`;
+            prevMonthDay++;
+            prevPos++;
+          } else if (presMonthStartDay <= presPos && calendarDay < presMonthLastDate) {
+            calendarDay++;
+            presMonth.setDate(calendarDay);
+            if (isSameDate(date, presMonth)) {
+              table += `><span class="today">${calendarDay}</span>`;
+            } else {
+              table += `>${calendarDay}`;
+            }
+          } else {
+            nextMonthDay++;
+            table += `><span class="disable">${nextMonthDay}</span>`;
+          }
+          table += `</td>`;
+          presPos++;
         }
-        table += `</tr>`;
+        table += `</tr>
+          `;
       }
       table += `</table>
-      <div class="btn">
-      <button data-type="pre">이전달로</button>
-      <button data-type="next">다음달로</button>
-    </div>
-      `;
-      body.insertAdjacentHTML("beforeend", table);
+        <div class="btn">
+            <button data-type = "pre">previous</button>
+            <button data-type = "next">next</button>
+          </div>
+        `;
+      body.insertAdjacentHTML("afterbegin", table);
 
-      let span = document.getElementsByTagName("span")[0];
-      span.innerText = `${startDay.getFullYear()} 년 ${startDay.getMonth() + 1} 월`;
-      return true;
+      // 버튼액션 추가 - 함수바깥에선 1회 동작하고 작동안함..그래서 안에 넣어줌
+      // 아마 함수 호출시 HTML을 초기화해서 그런게 아닐까 싶음.
+      let btn = document.querySelector(".btn");
+      btn.addEventListener("click", (e) => {
+        let index = e.target.dataset.type;
+        switch (index) {
+          case "pre":
+            displayCalendar(--month);
+            break;
+          case "next":
+            displayCalendar(++month);
+            break;
+        }
+      });
+    }
+    // 날짜 비교
+    function isSameDate(date1, date2) {
+      return date1.getFullYear() == date2.getFullYear() && date1.getMonth() == date2.getMonth() && date1.getDate() == date2.getDate();
     }
   </script>
 </html>
