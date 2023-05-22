@@ -48,6 +48,63 @@
         animation: ani-page 2s linear;
         animation-fill-mode: forwards;
       }
+      .h1 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 75px;
+        opacity: 0;
+        transition: 1s;
+        letter-spacing: 0px;
+      }
+      .end .h1 {
+        opacity: 1;
+        letter-spacing: 10px;
+      }
+      .h1 > span {
+        transition: 1s;
+        position: relative;
+        top: 50px;
+      }
+      .end .h1 > span:first-child {
+        top: 0;
+        transition-delay: 0;
+      }
+      .end .h1 > span:nth-child(2) {
+        top: 0;
+        transition-delay: 0.2s;
+      }
+      .end .h1 > span:nth-child(3) {
+        top: 0;
+        transition-delay: 0.4s;
+      }
+      .end .h1 > span:nth-child(4) {
+        top: 0;
+        transition-delay: 0.6s;
+      }
+      .end .h1 > span:last-child {
+        top: 0;
+        transition-delay: 0.8s;
+      }
+      .s {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        border-radius: 0px;
+        transition: 1s;
+      }
+
+      .second .s {
+        border-radius: 50%;
+        background-color: blue;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
       @keyframes ani-page {
         0% {
           width: 0;
@@ -91,11 +148,18 @@
           <div class="swiper-wrapper">
             <!-- Slides -->
             <div class="swiper-slide">
-              <button id="btnDelete">삭제</button>
+              <div class="h1">
+                <span>H</span>
+                <span>E</span>
+                <span>L</span>
+                <span>L</span>
+                <span>O</span>
+              </div>
             </div>
-            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">
+              <div class="s"></div>
+            </div>
             <div class="swiper-slide">Slide 3</div>
-            <div class="swiper-slide">Slide 4</div>
             ...
           </div>
           <!-- If we need pagination -->
@@ -159,19 +223,34 @@
         scrollbar: {
           el: "#sw2 .swiper-scrollbar",
         },
-        autoplay: {
-          delay: 2000,
-        },
+        // autoplay: {
+        //   delay: 2000,
+        // },
       });
-      btnDelete.onclick = function () {
-        // 인스턴스(실제 내용)
-        if (swiper2.isVertical()) {
-          dir = "horizontal";
-        } else {
-          dir = "vertical";
+      //   btnDelete.onclick = function () {
+      //     // 인스턴스(실제 내용)
+      //     if (swiper2.isVertical()) {
+      //       dir = "horizontal";
+      //     } else {
+      //       dir = "vertical";
+      //     }
+      //     swiper2.changeDirection(dir);
+      //   };
+      swiper2.on("slideChangeTransitionEnd", function () {
+        switch (swiper2.realIndex) {
+          case 0:
+            document.body.classList.add("end");
+            document.body.classList.remove("second");
+            break;
+          case 1:
+            document.body.classList.add("second");
+            document.body.classList.remove("end");
+            break;
+          default:
+            document.body.classList.remove("end");
+            document.body.classList.remove("second");
         }
-        swiper2.changeDirection(dir);
-      };
+      });
     </script>
   </body>
 </html>
