@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <style>
+      .swiper {
+        width: 100%;
+        height: 100vh;
+      }
+      .wrap {
+        display: flex;
+        flex-direction: row;
+        margin: 10 auto;
+      }
+      .wrap > div {
+        width: 50%;
+      }
+      .wrap > div:nth-child(2) {
+        position: relative;
+      }
+      #sw2Page {
+        position: absolute;
+        top: 2%;
+        text-align: center;
+        transform: translateY(-2%);
+        z-index: 999;
+        height: 60px;
+      }
+      #sw2Page div {
+        width: 75px;
+        border-radius: 10px;
+      }
+
+      #sw2Page .swiper-pagination-bullet {
+        background-color: pink;
+      }
+      #sw2Page .swiper-pagination-bullet-active {
+        background-color: red;
+      }
+
+      #sw2Page .swiper-pagination-bullet-active div {
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        animation: ani-page 2s linear;
+        animation-fill-mode: forwards;
+      }
+      @keyframes ani-page {
+        0% {
+          width: 0;
+        }
+        100% {
+          width: 100%;
+        }
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="wrap">
+      <div>
+        <!-- Slider main container -->
+        <div id="sw1" class="swiper">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+            ...
+          </div>
+          <!-- If we need pagination -->
+          <div class="swiper-pagination"></div>
+
+          <!-- If we need navigation buttons -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+
+          <!-- If we need scrollbar -->
+          <div class="swiper-scrollbar"></div>
+        </div>
+      </div>
+      <div>
+        <!-- Slider main container -->
+        <div id="sw2" class="swiper">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+              <button id="btnDelete">삭제</button>
+            </div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+            <div class="swiper-slide">Slide 4</div>
+            ...
+          </div>
+          <!-- If we need pagination -->
+          <div class="swiper-pagination"></div>
+
+          <!-- If we need navigation buttons -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+
+          <!-- If we need scrollbar -->
+          <div class="swiper-scrollbar"></div>
+        </div>
+        <div id="sw2Page"></div>
+      </div>
+    </div>
+
+    <script>
+      let flag = false;
+      const swiper = new Swiper("#sw1", {
+        // Optional parameters
+        // direction: "vertical",
+        loop: true,
+
+        // If we need pagination
+        pagination: {
+          el: "#sw1 .swiper-pagination",
+        },
+
+        // Navigation arrows
+        navigation: {
+          nextEl: "#sw1 .swiper-button-next",
+          prevEl: "#sw1 .swiper-button-prev",
+        },
+
+        // And if we need scrollbar
+        scrollbar: {
+          el: "#sw1 .swiper-scrollbar",
+        },
+      });
+      const swiper2 = new Swiper("#sw2", {
+        // Optional parameters
+        // direction: "vertical",
+        loop: false,
+
+        // If we need pagination
+        pagination: {
+          el: "#sw2Page",
+          clickable: true,
+          renderBullet: function (index, className) {
+            return `<div class="${className}"><div></div></div>`;
+          },
+        },
+
+        // Navigation arrows
+        navigation: {
+          nextEl: "#sw2 .swiper-button-next",
+          prevEl: "#sw2 .swiper-button-prev",
+        },
+
+        // And if we need scrollbar
+        scrollbar: {
+          el: "#sw2 .swiper-scrollbar",
+        },
+        autoplay: {
+          delay: 2000,
+        },
+      });
+      btnDelete.onclick = function () {
+        // 인스턴스(실제 내용)
+        if (swiper2.isVertical()) {
+          dir = "horizontal";
+        } else {
+          dir = "vertical";
+        }
+        swiper2.changeDirection(dir);
+      };
+    </script>
+  </body>
+</html>
