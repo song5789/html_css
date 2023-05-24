@@ -52,10 +52,12 @@
                   <img src="https://www.w3schools.com/w3images/coffee.jpg" alt="" />
                 </div>
               </div>
-              <div class="swiper-button-next"></div>
-              <div class="swiper-pagination"></div>
-              <div class="swiper-button-prev"></div>
-              <div id="swPag"></div>
+              <div class="btn-container">
+                <div class="swiper-button-next"></div>
+                <!-- <div class="swiper-pagination"></div> -->
+                <div id="swPag"></div>
+                <div class="swiper-button-prev"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -66,8 +68,8 @@
             </div>
             <div></div>
           </div>
-          <div class="offer-grid flex-row">
-            <div class="flex-column align-center">
+          <div class="offer-grid">
+            <div id="opt1" class="">
               <div>
                 <span class="grid-cap">Design</span>
               </div>
@@ -75,7 +77,7 @@
                 <span>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</span>
               </div>
             </div>
-            <div class="flex-column align-center">
+            <div id="opt2" class="">
               <div>
                 <span class="grid-cap">Branding</span>
               </div>
@@ -83,7 +85,7 @@
                 <span>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</span>
               </div>
             </div>
-            <div class="flex-column align-center">
+            <div id="opt3" class="">
               <div>
                 <span class="grid-cap">Consultation</span>
               </div>
@@ -91,7 +93,7 @@
                 <span>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</span>
               </div>
             </div>
-            <div class="flex-column align-center">
+            <div id="opt4" class="">
               <div>
                 <span class="grid-cap">Promises</span>
               </div>
@@ -108,7 +110,7 @@
             </div>
             <div><span>Choose a pricing plan that fits your needs.</span></div>
           </div>
-          <div class="flex-row align-center">
+          <div>
             <div>
               <div class="background-black">
                 <span>Basic</span>
@@ -184,7 +186,7 @@
             </div>
             <div></div>
           </div>
-          <div class="flex-row align-center">
+          <div class="">
             <div class="staff add-shadow">
               <div>
                 <div>
@@ -315,7 +317,7 @@
         pagination: {
           el: "#swPag",
           renderBullet: function (index, className) {
-            return `<div class="${className}"></div>`;
+            return `<div class="${className}"><div></div></div>`;
           },
         },
       });
