@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .mask {
+        width: 50px;
+        height: 50px;
+        background-image: url("sp.png");
+        background-size: 959px;
+        background-repeat: no-repeat;
+        background-position: 51% 38%;
+      }
+      .mask:hover {
+        opacity: 0.8;
+      }
+      /* 1472 x 325 */
+      /* 8fps */
+      .man {
+        width: 180px;
+        height: 325px;
+        background-image: url("walk.png");
+        background-position: 0 0;
+        animation: walk 0.65s steps(8) infinite;
+      }
+      @keyframes walk {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: -1472px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mask"></div>
+    <div class="man"></div>
+  </body>
+</html>
