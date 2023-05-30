@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #wrap {
+        width: 700px;
+        height: 700px;
+        border: 1px solid black;
+        text-align: center;
+        margin: 0 auto;
+      }
+      #wrap > div {
+        text-align: left;
+        width: 95%;
+        height: 85px;
+        padding-left: 10px;
+      }
+      #wrap > div > div {
+        width: 100%;
+        height: 35px;
+        border-radius: 50px;
+        box-shadow: 2px 2px 2px 1px black;
+      }
+      .graph {
+        width: 0;
+        height: 100%;
+        background-color: mediumaquamarine;
+        border-radius: 50px;
+        transition: 0.1s;
+        text-align: center;
+        line-height: 35px;
+        color: #fff;
+        font-size: 20px;
+      }
+      svg {
+        position: relative;
+        transform: rotate(270deg);
+      }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <button id="toBottom">to the bottom</button>
+    <div style="height: 700px"></div>
+    <div id="wrap">
+      <h1 style="margin-bottom: 75px">My Skills</h1>
+      <div>
+        <h2>HTML5</h2>
+        <div>
+          <div class="graph"></div>
+        </div>
+      </div>
+      <div>
+        <h2>CSS</h2>
+        <div>
+          <div class="graph"></div>
+        </div>
+      </div>
+      <div>
+        <h2>JavaScript</h2>
+        <div>
+          <div class="graph"></div>
+        </div>
+      </div>
+      <div>
+        <h2>Node.js</h2>
+        <div>
+          <div class="graph"></div>
+        </div>
+      </div>
+      <div>
+        <h2>Java</h2>
+        <div>
+          <div class="graph"></div>
+        </div>
+      </div>
+    </div>
+    <div style="height: 700px"></div>
+    <div id="area">
+      <svg width="500" height="500">
+        <circle id="cir" cx="250" cy="250" r="200" stroke="green" stroke-width="4" fill="white" />
+      </svg>
+      <div id="cirPer"></div>
+    </div>
+    <div style="height: 700px"></div>
+
+    <button id="toTop">To the Top</button>
+    <script>
+      let mySkills = [65, 75, 45, 48, 27];
+      let delay = 0;
+      let graphBar = document.getElementsByClassName("graph");
+      let svg = document.getElementsByTagName("svg")[0];
+      let wrap = document.querySelector("#wrap");
+      let cir = document.querySelector("#cir");
+      let toTop = document.querySelector("#toTop");
+      let toBottom = document.querySelector("#toBottom");
+
+      let isOnce = false;
+      let flag = false;
+      window.onscroll = function () {
+        /* window.scrollY: 뷰포트 상단이 문서의 y축 어디에 위치했는지*/
+
+        if (wrap.offsetTop - 400 <= window.scrollY) {
+          if (!flag) {
+            for (let i = 0; i < 5; i++) {
+              graphIncrease(graphBar[i], mySkills[i]);
+            }
+            flag = true;
+          }
+        } else if (window.scrollY == 0) {
+          flag = false;
+        } else if (window.scrollY >= 1500) {
+          flag = false;
+        }
+        if (area.offsetTop - 75 <= window.scrollY) {
+          if (!isOnce) {
+            go();
+            isOnce = true;
+          }
+        } else if (window.scrollY <= 270) {
+          isOnce = false;
+        } else if (window.scrollY >= 2300) {
+          isOnce = false;
+        }
+      };
+
+      toTop.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+      toBottom.addEventListener("click", () => {
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: "smooth",
+        });
+      });
+
+      /* ------------이하 함수들------------ */
+      function graphIncrease(elem, point) {
+        let cnt = 0;
+        let timerId = setInterval(() => {
+          elem.style.width = cnt + "%";
+          elem.innerText = cnt + "%";
+          cnt++;
+          if (cnt > point) {
+            clearInterval(timerId);
+          }
+        }, 20);
+      }
+
+      function go() {
+        let radius = Number(cir.getAttribute("r"));
+        let cirPer = document.querySelector("#cirPer");
+        let round = 2 * radius * Math.PI;
+        cir.style.strokeDasharray = round;
+        cir.style.strokeDashoffset = round;
+        let cirCnt = 0;
+        cirPer.innerText = "0%";
+        let cirId = setInterval(() => {
+          if (cirCnt == 85) clearInterval(cirId);
+          let r = round - (round * cirCnt) / 100;
+          cir.style.strokeDashoffset = r;
+          cirPer.innerText = cirCnt + "%";
+          cirCnt++;
+        }, 10);
+      }
+    </script>
+  </body>
+</html>
