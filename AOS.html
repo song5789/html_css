@@ -8,14 +8,56 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <style>
       body {
-        height: 10000px;
+        height: 4000px;
+        margin: 0;
+      }
+      .wrap {
+        width: 100vw;
+        height: 100%;
+        background-image: url("/public/images/background0.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+      }
+      .item {
+        width: 600px;
+        height: 600px;
+        background-color: gray;
+        text-align: center;
+        line-height: 600px;
+        margin-bottom: 20px;
+        font-size: 80px;
+        color: #fff;
+      }
+      .left-box {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+      }
+      .red {
+        background-color: red;
+      }
+      .green {
+        background-color: green;
       }
     </style>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   </head>
   <body>
-    <div style="height: 1700px"></div>
-    <div data-aos="fade-down" data-aos-duration="2000" data-aos-anchor-placement="center-center" style="background-color: red; height: 500px">test</div>
+    <div class="wrap">
+      <div class="left-box red" data-aos="fade-left" data-aos-achor="#triggerOne"></div>
+      <div class="left-box green" data-aos="fade-left" data-aos-achor="#triggerTwo"></div>
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item" id="triggerOne">5</div>
+      <div class="item" id="triggerTwo">6</div>
+    </div>
     <script>
       AOS.init();
     </script>

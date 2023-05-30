@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      section {
+        height: 1500px;
+      }
+      [data-scroll] {
+        transition: 0.4s;
+        opacity: 0;
+      }
+      [data-scroll] > h1 > span {
+        transition: 1s;
+        opacity: 0;
+        transform: translateY(20px);
+        display: inline-block;
+      }
+      [data-scroll="in"] {
+        opacity: 1;
+        transition-delay: 0.4s;
+        background-color: lightblue;
+      }
+      [data-scroll="in"] > h1 > span {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      [data-scroll="in"] > h1 > span:first-child {
+        transition-delay: 0;
+      }
+      [data-scroll="in"] > h1 > span:nth-child(1) {
+        transition-delay: 0.1s;
+      }
+      [data-scroll="in"] > h1 > span:nth-child(2) {
+        transition-delay: 0.2s;
+      }
+      [data-scroll="in"] > h1 > span:nth-child(3) {
+        transition-delay: 0.3s;
+      }
+      [data-scroll="in"] > h1 > span:nth-child(4) {
+        transition-delay: 0.4s;
+      }
+      [data-scroll="in"] > h1 > span:nth-child(5) {
+        transition-delay: 0.5s;
+      }
+      [data-scroll="in"] > h1 > span:nth-child(6) {
+        transition-delay: 0.6s;
+      }
+      [data-scroll="in"] > h1 > span:nth-child(7) {
+        transition-delay: 0.7s;
+      }
+      [data-scroll="in"] > h1 > span:last-child {
+        transition-delay: 0.8s;
+      }
+      [data-scroll="out"] {
+        opacity: 0;
+        background-color: white;
+      }
+      [data-scroll="out"] > h1 > span {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      .skill-bar {
+        width: 500px;
+        height: 25px;
+        border: 1px solid;
+      }
+      .skill-bar > div {
+        height: 100%;
+        width: 0;
+        background-color: red;
+      }
+    </style>
+    <script src="https://unpkg.com/scroll-out/dist/scroll-out.min.js"></script>
+  </head>
+  <body>
+    <section data-scroll>
+      <h1><span>S</span><span>e</span><span>c</span><span>t</span><span>i</span><span>o</span><span>n</span> <span>1</span></h1>
+    </section>
+    <section data-scroll>
+      <h1><span>S</span><span>e</span><span>c</span><span>t</span><span>i</span><span>o</span><span>n</span> <span>2</span></h1>
+    </section>
+    <section data-scroll class="skill">
+      <h1><span>S</span><span>e</span><span>c</span><span>t</span><span>i</span><span>o</span><span>n</span> <span>3</span></h1>
+      <div>html <span class="val"></span></div>
+      <div id="html" class="skill-bar">
+        <div></div>
+      </div>
+      <div>css <span class="val"></span></div>
+      <div id="css" class="skill-bar">
+        <div></div>
+      </div>
+      <div>js <span class="val"></span></div>
+      <div id="js" class="skill-bar">
+        <div></div>
+      </div>
+    </section>
+    <section data-scroll>
+      <h1><span>S</span><span>e</span><span>c</span><span>t</span><span>i</span><span>o</span><span>n</span> <span>4</span></h1>
+    </section>
+    <script>
+      function skillProgress() {
+        let val = [99, 70, 85];
+        let del = [1, 1.2, 1.4];
+        let timeInter = [];
+        let cnt = [];
+        let skillBar = document.querySelectorAll(".skill-bar");
+        let spanVal = document.querySelectorAll(".val");
+        skillBar.forEach(function (item, index) {
+          spanVal[index].innerHTML = "0%";
+          setTimeout(function () {
+            cnt[index] = 0;
+            timeInter[index] = setInterval(function () {
+              if (cnt[index] == val[index]) {
+                clearTimeout(timeInter[index]);
+              }
+              item.querySelector("div").style.width = cnt[index] + "%";
+              spanVal[index].innerHTML = cnt[index] + "%";
+              cnt[index]++;
+            }, 25);
+          }, del[index] * 1000);
+        });
+      }
+
+      ScrollOut({
+        targets: ["section"],
+        onShown: function (el, ctx, sel) {
+          if (el.classList.contains("skill")) {
+            skillProgress();
+          } else {
+          }
+        },
+      });
+    </script>
+  </body>
+</html>

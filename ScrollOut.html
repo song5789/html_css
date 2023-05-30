@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/scroll-out/dist/scroll-out.min.js"></script>
+    <style>
+      .wrap {
+        width: 850px;
+        height: 850px;
+        box-shadow: 3px 3px 4px 2px black;
+        text-align: center;
+        padding: 10px 0;
+        box-sizing: border-box;
+        margin: 0 auto;
+      }
+      h1 {
+        margin-bottom: 100px;
+      }
+      .graph-container {
+        width: 95%;
+        height: 600px;
+        margin: 0 auto;
+      }
+      .graph-container > div {
+        width: 100%;
+        height: 100px;
+        text-align: left;
+      }
+
+      .graph-container > div > div {
+        width: 100%;
+        height: 35px;
+        box-shadow: 2px 2px 2px 1px black;
+        border-radius: 50px;
+      }
+
+      .graph-container > div > div > div {
+        width: 0;
+        height: 100%;
+        background-color: dodgerblue;
+        border-radius: 50px;
+        transition: 0.2s;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-size: 20px;
+        text-shadow: 1px 1px 1px black;
+      }
+      [data-scroll] {
+        transition: opacity 1s;
+      }
+      [data-scroll="in"] {
+        opacity: 1;
+      }
+      [data-scroll="out"] {
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="height: 1000px"></div>
+    <div class="wrap">
+      <h1>My Skills</h1>
+      <div class="graph-container">
+        <div data-scroll>
+          <h2>HTML</h2>
+          <div>
+            <div class="graph"><span></span></div>
+          </div>
+        </div>
+        <div data-scroll>
+          <h2>CSS</h2>
+          <div>
+            <div class="graph"><span></span></div>
+          </div>
+        </div>
+        <div data-scroll>
+          <h2>JavaScript</h2>
+          <div>
+            <div class="graph"><span></span></div>
+          </div>
+        </div>
+        <div data-scroll>
+          <h2>Node.js</h2>
+          <div>
+            <div class="graph"><span></span></div>
+          </div>
+        </div>
+        <div data-scroll>
+          <h2>Java</h2>
+          <div>
+            <div class="graph"><span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="height: 700px"></div>
+    <script>
+      ScrollOut({
+        once: false,
+        onShown: function (el) {
+          el.animate([{ opacity: 0 }, { opacity: 1 }], 1500);
+        },
+      });
+
+      let graph = document.getElementsByClassName("graph");
+      let wrap = document.querySelector(".wrap");
+      let span = document.getElementsByTagName("span");
+      let points = [65, 71, 46, 30, 24];
+      let flag = false;
+      window.addEventListener("scroll", () => {
+        console.log(wrap.offsetTop - 50 <= window.scrollY);
+        console.log(window.scrollY);
+        if (wrap.offsetTop - 270 <= window.scrollY) {
+          if (!flag) {
+            setGraph(graph, points);
+            flag = true;
+          }
+        } else if (window.scrollY == 0) flag = false;
+      });
+
+      function setGraph(elements, points) {
+        for (let i = 0; i < elements.length; i++) {
+          increaseGraph(elements[i], points[i], span[i]);
+        }
+      }
+
+      function increaseGraph(elem, point, txt) {
+        let cnt = 0;
+        let timerId = setInterval(() => {
+          elem.style.width = cnt + "%";
+          txt.innerText = cnt + "%";
+          cnt++;
+          if (cnt > point) clearInterval(timerId);
+        }, 50);
+      }
+    </script>
+  </body>
+</html>
