@@ -28,6 +28,9 @@
         width: 100%;
         height: 100px;
         text-align: left;
+        transition: 0.8s;
+        position: relative;
+        top: 100px;
       }
 
       .graph-container > div > div {
@@ -56,6 +59,7 @@
       }
       [data-scroll="in"] {
         opacity: 1;
+        transform: translateY(-100px);
       }
       [data-scroll="out"] {
         opacity: 0;
