@@ -65,31 +65,136 @@
       .col-12 {
         width: 1024px;
       }
+
+      @media screen and (max-width: 1024px) {
+        .container {
+          width: 100%;
+          margin: 0 auto;
+        }
+        .row {
+          margin-bottom: 1.953125%;
+        }
+        .row::after {
+          content: "";
+          display: block;
+          clear: both;
+        }
+        [class^="col"] {
+          background-color: gray;
+          float: left;
+          margin-right: 1.953125%;
+        }
+
+        .col-1 {
+          width: 6.542969%;
+        }
+        .col-2 {
+          width: 15.030906%;
+        }
+        .col-3 {
+          width: 23.53516%;
+        }
+        .col-4 {
+          width: 32.03125%;
+        }
+        .col-5 {
+          width: 40.52734%;
+        }
+        .col-6 {
+          width: 49.02344%;
+        }
+        .col-7 {
+          width: 57.51953%;
+        }
+        .col-8 {
+          width: 66.01563%;
+        }
+        .col-9 {
+          width: 74.51172%;
+        }
+        .col-10 {
+          width: 83.00781%;
+        }
+        .col-11 {
+          width: 91.50391%;
+        }
+        .col-12 {
+          width: 100%;
+        }
+      }
+
+      @media screen and (max-width: 360px) {
+        .col-sm-1 {
+          width: 6.542969%;
+        }
+        .col-sm-2 {
+          width: 15.030906%;
+        }
+        .col-sm-3 {
+          width: 23.53516%;
+        }
+        .col-sm-4 {
+          width: 32.03125%;
+        }
+        .col-sm-5 {
+          width: 40.52734%;
+        }
+        .col-sm-6 {
+          width: 49.02344%;
+        }
+        .col-sm-7 {
+          width: 57.51953%;
+        }
+        .col-sm-8 {
+          width: 66.01563%;
+        }
+        .col-sm-9 {
+          width: 74.51172%;
+        }
+        .col-sm-10 {
+          width: 83.00781%;
+        }
+        .col-sm-11 {
+          width: 91.50391%;
+        }
+        .col-sm-12 {
+          width: 100%;
+        }
+        .col-sm-none {
+          display: none;
+        }
+        .col-mar-none {
+          margin-right: 0;
+        }
+        .col-mar-bottom {
+          margin-bottom: 1.953125%;
+        }
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-6">1</div>
-        <div class="col-6">2</div>
+        <div class="col-6 col-sm-12">1</div>
+        <div class="col-6 col-sm-none">2</div>
       </div>
       <div class="row">
-        <div class="col-1">1</div>
-        <div class="col-1">2</div>
-        <div class="col-1">3</div>
-        <div class="col-1">4</div>
-        <div class="col-1">5</div>
-        <div class="col-1">6</div>
-        <div class="col-1">7</div>
-        <div class="col-1">8</div>
-        <div class="col-1">9</div>
-        <div class="col-1">10</div>
-        <div class="col-1">11</div>
-        <div class="col-1">12</div>
+        <div class="col-1 col-sm-6">1</div>
+        <div class="col-1 col-sm-6 col-mar-none col-mar-bottom">2</div>
+        <div class="col-1 col-sm-6">3</div>
+        <div class="col-1 col-sm-6 col-mar-none col-mar-bottom">4</div>
+        <div class="col-1 col-sm-6">5</div>
+        <div class="col-1 col-sm-6 col-mar-none col-mar-bottom">6</div>
+        <div class="col-1 col-sm-6">7</div>
+        <div class="col-1 col-sm-6 col-mar-none col-mar-bottom">8</div>
+        <div class="col-1 col-sm-6">9</div>
+        <div class="col-1 col-sm-6 col-mar-none col-mar-bottom">10</div>
+        <div class="col-1 col-sm-6">11</div>
+        <div class="col-1 col-sm-6">12</div>
       </div>
       <div class="row">
-        <div class="col-3">3</div>
-        <div class="col-9">9</div>
+        <div class="col-3 col-sm-9">3</div>
+        <div class="col-9 col-sm-3">9</div>
       </div>
     </div>
   </body>
