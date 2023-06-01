@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,12 +7,40 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/ex4.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <script src="https://unpkg.com/scroll-out/dist/scroll-out.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <style>
+      [data-scroll] {
+        transition: 0.6s;
+      }
+      [data-scroll="in"] {
+        opacity: 1;
+        transition-delay: 0.2s;
+      }
+      [data-scroll="out"] {
+        opacity: 0;
+      }
+      .skill {
+        height: 20px;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
       <div class="left">
-        <div class="left-bg-img"></div>
+        <div class="swiper-container">
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="https://www.w3schools.com/w3images/profile_girl.jpg" alt="jane" /></div>
+              <div class="swiper-slide"><img src="https://www.w3schools.com/w3images/rocks.jpg" alt="jane" /></div>
+              <div class="swiper-slide"><img src="https://www.w3schools.com/w3images/underwater.jpg" alt="jane" /></div>
+              <div class="swiper-slide"><img src="https://www.w3schools.com/w3images/sailboat.jpg" alt="jane" /></div>
+              <div class="swiper-slide"><img src="https://www.w3schools.com/w3images/p6.jpg" alt="jane" /></div>
+              <div class="swiper-slide"><img src="https://www.w3schools.com/w3images/chef.jpg" alt="jane" /></div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="menu">
         <div class="menu-btn-close">
@@ -85,15 +113,16 @@
             </div>
             <div>
               <span
-                >Some text about me. Some text about me. I am lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
-                adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat.</span
+                >Some text about me. Some text about me. I am lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+                qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span
               >
             </div>
             <div>
               <span>My Skills</span>
+              <section data-scroll class="skill"></section>
             </div>
             <div class="show-skills">
               <div>
@@ -129,7 +158,7 @@
             </div>
 
             <div class="flex-row">
-              <div>
+              <div data-scroll class="career">
                 <div>
                   <span>14+</span>
                 </div>
@@ -137,7 +166,7 @@
                   <span>Partners</span>
                 </div>
               </div>
-              <div>
+              <div data-scroll class="career">
                 <div>
                   <span>55+</span>
                 </div>
@@ -145,7 +174,7 @@
                   <span>Projects Done</span>
                 </div>
               </div>
-              <div>
+              <div data-scroll class="career">
                 <div>
                   <span>89+</span>
                 </div>
@@ -153,7 +182,7 @@
                   <span>Happy Clients</span>
                 </div>
               </div>
-              <div>
+              <div data-scroll class="career">
                 <div>
                   <span>150+</span>
                 </div>
@@ -349,27 +378,54 @@
 
         graphBars.forEach(function (item, index) {
           graphText[index].innerHTML = "0%";
+          graphBars[index].style.width = "0%";
           setTimeout(function () {
             cnt[index] = 0;
             timeInter[index] = setInterval(function () {
-              if (cnt[index] == perValue[0]) {
+              if (cnt[index] == perValue[index]) {
                 clearInterval(timeInter[index]);
               }
               item.style.width = cnt[index] + "%";
               graphText[index].innerHTML = cnt[index] + "%";
               cnt[index]++;
             }, 25);
-          }, del[index] * 1000);
+          }, delay[index] * 1000);
         });
       }
 
-      scrollOut({
+      function careerTextUp() {
+        let careerText = document.querySelectorAll(".career");
+        let delay = [1, 1.2, 1.4, 1.6];
+        let timerInter = [];
+        careerText.forEach((v, index) => {
+          v.style.opacity = 0;
+          setTimeout(() => {
+            careerText[index].style.opacity = 1;
+            v.style.top = 0;
+          }, delay[index] * 1000);
+        });
+      }
+
+      ScrollOut({
         targets: ["section"],
         onShown: function (el, ctx, sel) {
-          if (el.classLis.contains("skill")) {
+          if (el.classList.contains("skill")) {
             graphIncease();
+            careerTextUp();
           } else {
           }
+        },
+      });
+    </script>
+    <script>
+      let swiper = new Swiper(".mySwiper", {
+        autoplay: {
+          delay: 4000,
+        },
+        effect: "coverflow",
+        fadeEffect: {
+          rotate: 30,
+          slideShadows: false,
         },
       });
     </script>
