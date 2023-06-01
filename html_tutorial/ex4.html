@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/ex4.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="https://unpkg.com/scroll-out/dist/scroll-out.min.js"></script>
   </head>
   <body>
     <div class="container">
@@ -100,7 +101,9 @@
                   <span>Photography</span>
                 </div>
                 <div>
-                  <div class="graph"></div>
+                  <div class="graph">
+                    <span class="graph-txt"></span>
+                  </div>
                 </div>
               </div>
               <div>
@@ -108,7 +111,9 @@
                   <span>Web Design</span>
                 </div>
                 <div>
-                  <div class="graph"></div>
+                  <div class="graph">
+                    <span class="graph-txt"></span>
+                  </div>
                 </div>
               </div>
               <div>
@@ -116,10 +121,13 @@
                   <span>Photoshop</span>
                 </div>
                 <div>
-                  <div class="graph"></div>
+                  <div class="graph">
+                    <span class="graph-txt"></span>
+                  </div>
                 </div>
               </div>
             </div>
+
             <div class="flex-row">
               <div>
                 <div>
@@ -320,22 +328,49 @@
       </div>
     </div>
     <script>
-      let graphBars = document.querySelectorAll(".graph");
       let menu = document.querySelector(".menu");
       let menuOpen = document.querySelector(".menu-btn-open");
       let menuClose = document.querySelector(".menu-btn-close");
-      let flag = false;
-      let atribute = [95, 85, 80];
-      for (let i = 0; i < atribute.length; i++) {
-        graphBars[i].style.width = `${atribute[i]}%`;
-        graphBars[i].innerText = `${atribute[i]}%`;
-      }
 
       menuOpen.addEventListener("click", () => {
         menu.style.left = "40%";
       });
       menuClose.addEventListener("click", () => {
         menu.style.left = "100%";
+      });
+
+      function graphIncease() {
+        let graphBars = document.querySelectorAll(".graph");
+        let graphText = document.querySelectorAll(".graph-txt");
+        let perValue = [95, 85, 80];
+        let delay = [1, 1.2, 1.4];
+        let timeInter = [];
+        let cnt = [];
+
+        graphBars.forEach(function (item, index) {
+          graphText[index].innerHTML = "0%";
+          setTimeout(function () {
+            cnt[index] = 0;
+            timeInter[index] = setInterval(function () {
+              if (cnt[index] == perValue[0]) {
+                clearInterval(timeInter[index]);
+              }
+              item.style.width = cnt[index] + "%";
+              graphText[index].innerHTML = cnt[index] + "%";
+              cnt[index]++;
+            }, 25);
+          }, del[index] * 1000);
+        });
+      }
+
+      scrollOut({
+        targets: ["section"],
+        onShown: function (el, ctx, sel) {
+          if (el.classLis.contains("skill")) {
+            graphIncease();
+          } else {
+          }
+        },
       });
     </script>
   </body>
