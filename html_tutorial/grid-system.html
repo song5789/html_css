@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/grid-system.css" />
+  </head>
+  <!-- img 사이즈가 부모를 넘어가지 않게하려면 width 를 100% 주면됨. -->
+  <style>
+    html,
+    body {
+      margin: 0;
+      font-family: Verdana, sans-serif;
+    }
+    img {
+      width: 100%;
+    }
+    .full-container {
+      width: 100%;
+    }
+    .mouse-on:hover {
+      background-color: rgba(158, 158, 158, 0.8);
+    }
+    .header {
+      padding: 0 1.5%;
+      width: 100%;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      background-color: #fff;
+      box-shadow: 0 2px 6px 1px gray;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+      z-index: 999;
+    }
+    .header > div:first-child {
+      width: 11.1%;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      font-size: 15px;
+    }
+    .header > div:last-child {
+      width: 30%;
+      height: 30px;
+    }
+    ul {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    li {
+      width: calc(100% / 3);
+      text-align: center;
+      line-height: 30px;
+    }
+    li > a:link,
+    li > a:visited {
+      text-decoration: none;
+      color: black;
+    }
+    #main-picture {
+      height: 600px;
+      background-image: url("https://www.w3schools.com/w3images/architect.jpg");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      margin-bottom: 70px;
+    }
+    #main-picture > div {
+      width: 400px;
+      height: 50px;
+      font-size: 30px;
+      color: #fff;
+    }
+    #main-picture > div > div:first-child {
+      width: 70px;
+      height: 100%;
+      text-align: center;
+      font-weight: 700;
+      line-height: 50px;
+      margin-right: 15px;
+      background-color: black;
+      opacity: 0.8;
+    }
+    #projects {
+      width: 100%;
+      height: 500px;
+      margin-bottom: 70px;
+    }
+    #projects > div:first-child {
+      width: 100%;
+      height: 50px;
+      font-size: 25px;
+      border-bottom: 1px solid gray;
+      margin-bottom: 50px;
+    }
+    #projects > div:not(:first-child) {
+      width: 100%;
+      height: 190px;
+    }
+    #projects > div:not(:first-child) > div {
+      height: 100%;
+    }
+    #projects > div:not(:first-child) > div > div {
+      width: 100px;
+      height: 30px;
+      background-color: black;
+      color: #fff;
+      font-size: 11px;
+      text-align: center;
+      line-height: 30px;
+    }
+    .summer-house1 {
+      background: url("https://www.w3schools.com/w3images/house5.jpg") no-repeat;
+      background-size: 100% 100%;
+    }
+    .brick-house1 {
+      background: url("https://www.w3schools.com/w3images/house2.jpg") no-repeat;
+      background-size: 100% 100%;
+    }
+    .renovated1 {
+      background: url("https://www.w3schools.com/w3images/house3.jpg") no-repeat;
+      background-size: 100% 100%;
+    }
+    .barn-house1 {
+      background: url("https://www.w3schools.com/w3images/house4.jpg") no-repeat;
+      background-size: 100% 100%;
+    }
+    #about {
+      width: 100%;
+      height: 600px;
+      margin-bottom: 100px;
+    }
+    #about > div:first-child {
+      width: 100%;
+      height: 50px;
+      font-size: 25px;
+      border-bottom: 1px solid gray;
+      margin-bottom: 20px;
+    }
+    #about > div:nth-child(2) {
+      width: 100%;
+      height: 120px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    #about > div:last-child {
+      width: 100%;
+      height: 430px;
+    }
+    #about > div:last-child > div {
+      height: 100%;
+    }
+    #about > div:last-child > div > div {
+      width: 100%;
+    }
+    #about > div:last-child > div > div:first-child {
+      height: 180px;
+      margin-bottom: 30px;
+    }
+    #about > div:last-child > div > div:nth-child(2) {
+      height: 50px;
+      line-height: 35px;
+      font-size: 22px;
+    }
+    #about > div:last-child > div > div:nth-child(3) {
+      height: 40px;
+      line-height: 35px;
+      font-size: 13px;
+      color: gray;
+    }
+    #about > div:last-child > div > div:nth-child(4) {
+      font-size: 14px;
+      height: 100px;
+      line-height: 1.5;
+    }
+    #about > div:last-child > div > div:last-child {
+      height: 30px;
+    }
+    #about > div:last-child > div > div:last-child > button {
+      height: 100%;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .john {
+      background: url("https://www.w3schools.com/w3images/team2.jpg") no-repeat;
+      background-size: 100% 100%;
+    }
+    .jane {
+      background: url("https://www.w3schools.com/w3images/team1.jpg") no-repeat;
+      background-size: 100% 100%;
+    }
+    .mike {
+      background: url("https://www.w3schools.com/w3images/team3.jpg") no-repeat;
+      background-size: 100% 100%;
+    }
+    .dan {
+      background: url("https://www.w3schools.com/w3images/team4.jpg") no-repeat;
+      background-size: 100% 100%;
+    }
+    #contact {
+      width: 100%;
+      height: 400px;
+    }
+    #contact > div:first-child {
+      width: 100%;
+      height: 50px;
+      font-size: 25px;
+      border-bottom: 1px solid gray;
+      margin-bottom: 20px;
+    }
+    #contact > div:nth-child(2) {
+      width: 100%;
+      height: 50px;
+      font-size: 15px;
+    }
+    #contact > div:last-child {
+      width: 100%;
+      height: 240px;
+    }
+
+    #bottom-picture {
+      height: 570px;
+    }
+    #footer {
+      width: 100%;
+      height: 80px;
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      line-height: 80px;
+    }
+    .float {
+      float: left;
+    }
+    .clear-float::after {
+      clear: both;
+      content: "";
+      display: block;
+    }
+    .flex-row {
+      display: flex;
+      flex-direction: row;
+    }
+    .align-center {
+      justify-content: center;
+      align-items: center;
+    }
+    .letter-spacing02 {
+      letter-spacing: 4px;
+    }
+    form > div:first-child {
+      display: flex;
+      flex-direction: column;
+    }
+    form > div:last-child {
+      width: 100%;
+      height: 40px;
+    }
+    form button {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background-color: black;
+      color: #fff;
+    }
+    form button:hover {
+      background-color: gray;
+      color: #000;
+    }
+    input {
+      margin-bottom: 10px;
+      width: 100%;
+      height: 40px;
+      box-sizing: border-box;
+    }
+  </style>
+  <body>
+    <div class="full-container">
+      <div class="header flex-row">
+        <div id="toTop" class="mouse-on letter-spacing02">
+          <span><b>BR</b> Architects</span>
+        </div>
+        <div>
+          <ul class="clear-float">
+            <li class="float letter-spacing02 mouse-on"><a href="#projects">Project</a></li>
+            <li class="float letter-spacing02 mouse-on"><a href="#about">About</a></li>
+            <li class="float letter-spacing02 mouse-on"><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container">
+        <div id="main-picture" class="row flex-row align-center">
+          <div class="flex-row align-center letter-spacing02">
+            <div>BR</div>
+            <div>Architects</div>
+          </div>
+        </div>
+        <div id="projects" class="row">
+          <div>
+            <span>Projects</span>
+          </div>
+          <div class="row">
+            <div class="col-3 summer-house1">
+              <div>
+                <div>
+                  <span>SummerHouse</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-3 brick-house1">
+              <div>
+                <div>
+                  <span>Brick House</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-3 renovated1">
+              <div>
+                <div>
+                  <span>Renovated</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-3 barn-house1">
+              <div>
+                <div>
+                  <span>Barn House</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3 brick-house1">
+              <div>
+                <div>
+                  <span>SummerHouse</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-3 summer-house1">
+              <div>
+                <div>
+                  <span>Brick House</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-3 barn-house1">
+              <div>
+                <div>
+                  <span>Renovated</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-3 renovated1">
+              <div>
+                <div>
+                  <span>Barn House</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="about">
+          <div>
+            <span>About</span>
+          </div>
+          <div>
+            <span
+              >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+              id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+              ullamco laboris nisi ut aliquip ex ea commodo consequat.</span
+            >
+          </div>
+          <div class="row">
+            <div class="col-3">
+              <div class="john"></div>
+              <div>
+                <span>John Doe</span>
+              </div>
+              <div>
+                <span>CEO & Founder</span>
+              </div>
+              <div>
+                <span> Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum. </span>
+              </div>
+              <div>
+                <button class="mouse-on">Contact</button>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="jane"></div>
+              <div>
+                <span>Jane Doe</span>
+              </div>
+              <div>
+                <span>Architect</span>
+              </div>
+              <div>
+                <span> Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum. </span>
+              </div>
+              <div>
+                <button class="mouse-on">Contact</button>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="mike"></div>
+              <div>
+                <span>Mike Ross</span>
+              </div>
+              <div>
+                <span>Architect</span>
+              </div>
+              <div>
+                <span> Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum. </span>
+              </div>
+              <div>
+                <button class="mouse-on">Contact</button>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="dan"></div>
+              <div>
+                <span>Dan Star</span>
+              </div>
+              <div>
+                <span>Architect</span>
+              </div>
+              <div>
+                <span> Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum. </span>
+              </div>
+              <div>
+                <button class="mouse-on">Contact</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="contact">
+          <div>
+            <span>Contact</span>
+          </div>
+          <div>
+            <span>Lets get in touch and talk about your next project</span>
+          </div>
+          <div>
+            <form>
+              <div>
+                <input type="text" placeholder="Name" />
+                <input type="email" placeholder="Email" />
+                <input type="text" placeholder="Subject" />
+                <input type="text" placeholder="Comment" />
+              </div>
+              <div>
+                <button>SEND MESSAGE</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div id="bottom-picture" class="row">
+          <div class="col-12">
+            <img src="https://www.w3schools.com/w3images/map.jpg" alt="map" />
+          </div>
+        </div>
+      </div>
+      <div id="footer">
+        <div>
+          <span>Powerd by</span>
+          <span><a href="https://www.w3schools.com/w3css/default.asp">w3.css</a></span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
