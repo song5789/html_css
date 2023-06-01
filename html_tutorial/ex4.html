@@ -15,11 +15,9 @@
         transition: 0.6s;
       }
       [data-scroll="in"] {
-        opacity: 1;
         transition-delay: 0.2s;
       }
       [data-scroll="out"] {
-        opacity: 0;
       }
       .skill {
         height: 20px;
@@ -407,12 +405,12 @@
       }
 
       ScrollOut({
-        targets: ["section"],
+        targets: ["section", ".career"],
         onShown: function (el, ctx, sel) {
           if (el.classList.contains("skill")) {
             graphIncease();
+          } else if (el.classList.contains("career")) {
             careerTextUp();
-          } else {
           }
         },
       });
