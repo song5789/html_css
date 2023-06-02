@@ -5,3 +5,4 @@ DCL - 데이터베이스 컨트롤
 
 MySQL 설치 
 Node.js -> npm install mysql 
+C:\Program Files\MySQL\MySQL Workbench 8.0
