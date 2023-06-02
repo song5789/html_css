@@ -1,0 +1,7 @@
+SQL
+DDL - 데이터 베이스 정의어
+DML - 데이터 처리어
+DCL - 데이터베이스 컨트롤
+
+MySQL 설치 
+Node.js -> npm install mysql 

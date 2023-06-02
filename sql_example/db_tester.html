@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Query Test</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #wrap {
+        padding: 15px;
+      }
+      textarea {
+        width: 100%;
+        height: 25vh;
+        resize: vertical;
+      }
+      .error {
+        color: red;
+      }
+      #viewQuery > .recode {
+        font-size: 12px;
+        margin-top: 7px;
+        margin-bottom: 3px;
+      }
+      #viewQuery > table {
+        width: 100%;
+        font-size: 12px;
+      }
+      #viewQuery > table,
+      #viewQuery > table tr,
+      #viewQuery > table th,
+      #viewQuery > table td {
+        border: 1px solid;
+        border-collapse: collapse;
+      }
+      #viewQuery > table th {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        background-color: lightgreen;
+      }
+      #viewQuery > table td {
+        padding-top: 3px;
+        padding-bottom: 3px;
+        padding-left: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrap">
+      <form method="post">
+        <textarea id="txtQuery" name="query"><%=query%></textarea>
+      </form>
+      <div id="viewQuery"></div>
+    </div>
+    <script>
+      txtQuery.onkeydown = function(e) {
+        var query = txtQuery.value;
+        if(e.ctrlKey && e.keyCode == 13 && query != "") {
+          document.forms[0].submit();
+        }
+      };
+
+      function ejsHandling(code) {
+        viewQuery.innerHTML = "";
+        let divRecode = tabHead = tabBody = "", recode = 0;
+        switch(code) {
+          case 1:
+            let result = <%-JSON.stringify(result)%>;
+            if(!Array.isArray(result)) {
+              return;
+            }
+            tabHead += "<table><tr>";
+            result.forEach(function(item, index) {
+              tabBody += "<tr>";
+              for(let key in item) {
+                if(index == 0) {
+                  tabHead += `<th>${key}</th>`;
+                }
+                tabBody += `<td>${item[key]}</td>`;
+              }
+              tabBody += "</tr>";
+              recode++;
+            });
+            divRecode = `<div class='recode'>레코드수: ${recode}</div>`;
+            tabHead += "</tr>";
+            viewQuery.insertAdjacentHTML("afterbegin", divRecode + tabHead + tabBody);
+            break;
+          case 0:
+            viewQuery.insertAdjacentHTML("afterbegin", "<div class='error'><%=error%></div>".replaceAll("'", "'"));
+            break;
+          case -1:
+            break;
+        }
+        txtQuery.focus();
+        txtQuery.setSelectionRange(txtQuery.value.length, txtQuery.value.length);
+      }
+
+      ejsHandling(<%=code%>);
+    </script>
+  </body>
+</html>
